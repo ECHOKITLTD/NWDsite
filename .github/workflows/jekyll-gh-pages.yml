@@ -25,13 +25,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Prepare site
+        run: |
+          mkdir -p _site
+          cp -R www.neilwilsondesign.co.uk/. _site/
+          cp -R lirp.cdn-website.com _site/lirp.cdn-website.com
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./www.neilwilsondesign.co.uk
+          path: ./_site
 
       - name: Deploy to GitHub Pages
         id: deployment
