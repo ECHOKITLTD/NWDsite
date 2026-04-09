@@ -1584,5 +1584,37 @@ div.u_1566262687
 }
 </style><!--  End Product Custom HTML Markup -->
 
+	
+	<script> <!--  fix more link-->
+document.addEventListener("DOMContentLoaded", function () {
+  const button = document.querySelector(".photoGalleryViewAll.link");
+  const gallery = document.querySelector(".dmPhotoGallery.newPhotoGallery");
+
+  if (!button || !gallery) return;
+
+  const hiddenRows = () => gallery.querySelectorAll(".photogallery-row.photogallery-hidden-row");
+
+  button.addEventListener("click", function () {
+    const rows = hiddenRows();
+    const isExpanded = button.getAttribute("data-mode") === "more";
+
+    if (!isExpanded) {
+      rows.forEach(row => {
+        row.classList.remove("photogallery-hidden-row");
+      });
+      button.textContent = button.getAttribute("data-viewless") || "View less";
+      button.setAttribute("data-mode", "more");
+    } else {
+      rows.forEach(row => {
+        row.classList.add("photogallery-hidden-row");
+      });
+      button.textContent = button.getAttribute("data-viewall") || "View more";
+      button.setAttribute("data-mode", "less");
+
+      gallery.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+});
+</script>
 
 </body></html>
