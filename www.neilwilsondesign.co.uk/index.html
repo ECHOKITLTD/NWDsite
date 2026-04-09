@@ -591,10 +591,12 @@
 </div> 
 
  replace-->	
-<div id="INTERIORS"
+
+
+	<div id="INTERIORS"
      class="u_INTERIORS dmRespRow dmSectionNoParallax hasExtraLayerOverlay"
      data-anchor="INTERIORS"
-     style="position:relative; min-height:70vh; overflow:hidden; text-align:center; padding:0;">
+     style="position:relative; overflow:hidden; padding:0 !important;">
 
   <div class="custom-carousel-slide active"
        style="background-image:url('../lirp.cdn-website.com/77aa5218/dms3rep/multi/opt/Black+Swan+Inn+104-1920w.jpg');"></div>
@@ -615,9 +617,9 @@
 <style>
 #INTERIORS {
   position: relative;
-  min-height: 70vh;
   overflow: hidden;
   padding: 0 !important;
+  min-height: 520px;
 }
 
 #INTERIORS .custom-carousel-slide {
@@ -643,36 +645,32 @@
 }
 
 #INTERIORS .custom-carousel-content {
-  position: relative;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   z-index: 3;
-  min-height: 70vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 90%;
+  max-width: 1200px;
   text-align: center;
-  padding: 4vw;
+  pointer-events: none;
 }
 
 #INTERIORS .custom-carousel-heading {
   margin: 0;
   color: #fff;
   font-family: SouvenirB, "SouvenirB", sans-serif;
-  
+
   line-height: 1.05;
   font-size: clamp(2.2rem, 7vw, 5.5rem);
-  max-width: 90vw;
-  text-wrap: balance;
 }
 
 @media (max-width: 767px) {
-  #INTERIORS,
-  #INTERIORS .custom-carousel-content {
-    min-height: 48vh;
+  #INTERIORS {
+    min-height: 380px;
   }
-
   #INTERIORS .custom-carousel-heading {
-    max-width: 92vw;
-    font-size: clamp(2rem, 10vw, 3.2rem);
+    font-size: clamp(2rem, 10vw, 3.4rem);
   }
 }
 </style>
@@ -683,22 +681,47 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!carousel) return;
 
   const slides = carousel.querySelectorAll('.custom-carousel-slide');
-  if (slides.length < 2) return;
+  const content = carousel.querySelector('.custom-carousel-content');
 
-  let index = 0;
+  function positionCarouselText() {
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const header = document.querySelector('.dmHeaderContainer');
+    const headerHeight = header ? header.offsetHeight : 0;
 
-  setInterval(function () {
-    slides[index].classList.remove('active');
-    index = (index + 1) % slides.length;
-    slides[index].classList.add('active');
-  }, 3000);
+    let sectionHeight = Math.round(vh * 0.7);
+    sectionHeight = Math.max(sectionHeight, 380);
+    if (window.innerWidth > 767) sectionHeight = Math.max(sectionHeight, 520);
+
+    carousel.style.height = sectionHeight + 'px';
+
+    const visualCenter = (sectionHeight + headerHeight) / 2;
+    const adjustedCenter = visualCenter - (headerHeight * 0.35);
+
+    content.style.top = adjustedCenter + 'px';
+    content.style.left = '50%';
+    content.style.transform = 'translate(-50%, -50%)';
+  }
+
+  positionCarouselText();
+  window.addEventListener('load', positionCarouselText);
+  window.addEventListener('resize', positionCarouselText);
+  window.addEventListener('orientationchange', positionCarouselText);
+
+  if (slides.length > 1) {
+    let index = 0;
+    setInterval(function () {
+      slides[index].classList.remove('active');
+      index = (index + 1) % slides.length;
+      slides[index].classList.add('active');
+    }, 3000);
+  }
 });
-</script>
+</script> 
 
 	 
 
 
-<!-- replace-->	
+<!-- replace  SouvenirB font-->	
 
 	 
  <div class="u_1376406423 dmRespRow" id="1376406423"> <div class="dmRespColsWrapper" id="1371623619"> <div class="dmRespCol large-12 medium-12 small-12" id="1015926575"> <h3 class="u_1088843014 dmNewParagraph" data-element-type="paragraph" id="1088843014" style="transition: opacity 1s ease-in-out; display: block;"><span></span><span style="font-weight: 400;"><font style="color: rgb(56, 55, 55);">Our Interiors</font></span></h3></div> 
