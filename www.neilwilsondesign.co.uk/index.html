@@ -592,11 +592,10 @@
 
  replace-->	
 
-
-	<div id="INTERIORS"
+<div id="INTERIORS"
      class="u_INTERIORS dmRespRow dmSectionNoParallax hasExtraLayerOverlay"
      data-anchor="INTERIORS"
-     style="position:relative; overflow:hidden; padding:0 !important;">
+     style="position:relative; min-height:70vh; overflow:hidden; text-align:center; padding:0;">
 
   <div class="custom-carousel-slide active"
        style="background-image:url('../lirp.cdn-website.com/77aa5218/dms3rep/multi/opt/Black+Swan+Inn+104-1920w.jpg');"></div>
@@ -617,9 +616,9 @@
 <style>
 #INTERIORS {
   position: relative;
+  min-height: 70vh;
   overflow: hidden;
   padding: 0 !important;
-  min-height: 520px;
 }
 
 #INTERIORS .custom-carousel-slide {
@@ -645,32 +644,36 @@
 }
 
 #INTERIORS .custom-carousel-content {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
   z-index: 3;
-  width: 90%;
-  max-width: 1200px;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  pointer-events: none;
+  padding: 4vw;
 }
 
 #INTERIORS .custom-carousel-heading {
   margin: 0;
   color: #fff;
   font-family: SouvenirB, "SouvenirB", sans-serif;
-
+  font-weight: 600;
   line-height: 1.05;
   font-size: clamp(2.2rem, 7vw, 5.5rem);
+  max-width: 90vw;
+  text-wrap: balance;
 }
 
 @media (max-width: 767px) {
-  #INTERIORS {
-    min-height: 380px;
+  #INTERIORS,
+  #INTERIORS .custom-carousel-content {
+    min-height: 48vh;
   }
+
   #INTERIORS .custom-carousel-heading {
-    font-size: clamp(2rem, 10vw, 3.4rem);
+    max-width: 92vw;
+    font-size: clamp(2rem, 10vw, 3.2rem);
   }
 }
 </style>
@@ -681,44 +684,17 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!carousel) return;
 
   const slides = carousel.querySelectorAll('.custom-carousel-slide');
-  const content = carousel.querySelector('.custom-carousel-content');
+  if (slides.length < 2) return;
 
-  function positionCarouselText() {
-    const vh = window.innerHeight || document.documentElement.clientHeight;
-    const header = document.querySelector('.dmHeaderContainer');
-    const headerHeight = header ? header.offsetHeight : 0;
+  let index = 0;
 
-    let sectionHeight = Math.round(vh * 0.7);
-    sectionHeight = Math.max(sectionHeight, 380);
-    if (window.innerWidth > 767) sectionHeight = Math.max(sectionHeight, 520);
-
-    carousel.style.height = sectionHeight + 'px';
-
-    const visualCenter = (sectionHeight + headerHeight) / 2;
-    const adjustedCenter = visualCenter - (headerHeight * 0.35);
-
-    content.style.top = adjustedCenter + 'px';
-    content.style.left = '50%';
-    content.style.transform = 'translate(-50%, -50%)';
-  }
-
-  positionCarouselText();
-  window.addEventListener('load', positionCarouselText);
-  window.addEventListener('resize', positionCarouselText);
-  window.addEventListener('orientationchange', positionCarouselText);
-
-  if (slides.length > 1) {
-    let index = 0;
-    setInterval(function () {
-      slides[index].classList.remove('active');
-      index = (index + 1) % slides.length;
-      slides[index].classList.add('active');
-    }, 3000);
-  }
+  setInterval(function () {
+    slides[index].classList.remove('active');
+    index = (index + 1) % slides.length;
+    slides[index].classList.add('active');
+  }, 3000);
 });
-</script> 
-
-	 
+</script>
 
 
 <!-- replace  SouvenirB font-->	
