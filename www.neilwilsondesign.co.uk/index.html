@@ -591,11 +591,10 @@
 </div> 
 
  replace-->	
-
 <div id="INTERIORS"
      class="u_INTERIORS dmRespRow dmSectionNoParallax hasExtraLayerOverlay"
      data-anchor="INTERIORS"
-     style="position:relative; min-height:700px; overflow:hidden; text-align:center;">
+     style="position:relative; min-height:70vh; overflow:hidden; text-align:center; padding:0;">
 
   <div class="custom-carousel-slide active"
        style="background-image:url('../lirp.cdn-website.com/77aa5218/dms3rep/multi/opt/Black+Swan+Inn+104-1920w.jpg');"></div>
@@ -606,42 +605,74 @@
   <div class="custom-carousel-slide"
        style="background-image:url('../lirp.cdn-website.com/77aa5218/dms3rep/multi/opt/BombayGrill15_0016-1920w.jpg');"></div>
 
-  <div style="position:absolute; inset:0; background:rgba(0,0,0,0.22); z-index:2;"></div>
+  <div class="custom-carousel-overlay"></div>
 
-  <div class="dmRespColsWrapper"
-       style="position:relative; z-index:3; min-height:700px; display:flex; align-items:center; justify-content:center;">
-    <div class="dmRespCol small-12 medium-12 large-12"
-         style="display:flex; align-items:center; justify-content:center;">
-      <div style="color:#fff; font-family:SouvenirB, 'SouvenirB', sans-serif; font-size:74px; line-height:1.1; font-weight:600; text-align:center; padding:20px;">
-        Welcome
-      </div>
-    </div>
+  <div class="custom-carousel-content">
+    <h1 class="custom-carousel-heading">Our Interiors</h1>
   </div>
 </div>
 
 <style>
-#INTERIORS .custom-carousel-slide{
-  position:absolute;
-  inset:0;
-  background-size:cover;
-  background-position:center center;
-  background-repeat:no-repeat;
-  opacity:0;
-  transition:opacity 1s ease-in-out;
-  z-index:1;
+#INTERIORS {
+  position: relative;
+  min-height: 70vh;
+  overflow: hidden;
+  padding: 0 !important;
 }
-#INTERIORS .custom-carousel-slide.active{
-  opacity:1;
+
+#INTERIORS .custom-carousel-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  z-index: 1;
 }
-@media (max-width: 767px){
-  #INTERIORS{
-    min-height:420px !important;
+
+#INTERIORS .custom-carousel-slide.active {
+  opacity: 1;
+}
+
+#INTERIORS .custom-carousel-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.22);
+  z-index: 2;
+}
+
+#INTERIORS .custom-carousel-content {
+  position: relative;
+  z-index: 3;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4vw;
+}
+
+#INTERIORS .custom-carousel-heading {
+  margin: 0;
+  color: #fff;
+  font-family: SouvenirB, "SouvenirB", sans-serif;
+  
+  line-height: 1.05;
+  font-size: clamp(2.2rem, 7vw, 5.5rem);
+  max-width: 90vw;
+  text-wrap: balance;
+}
+
+@media (max-width: 767px) {
+  #INTERIORS,
+  #INTERIORS .custom-carousel-content {
+    min-height: 48vh;
   }
-  #INTERIORS .dmRespColsWrapper{
-    min-height:420px !important;
-  }
-  #INTERIORS .dmRespColsWrapper > div > div{
-    font-size:38px !important;
+
+  #INTERIORS .custom-carousel-heading {
+    max-width: 92vw;
+    font-size: clamp(2rem, 10vw, 3.2rem);
   }
 }
 </style>
@@ -663,6 +694,8 @@ document.addEventListener('DOMContentLoaded', function () {
   }, 3000);
 });
 </script>
+
+	 
 
 
 <!-- replace-->	
