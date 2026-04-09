@@ -592,46 +592,77 @@
 
  replace-->	
 
-<div class="u_INTERIORS dmRespRow dmSectionNoParallax hasExtraLayerOverlay slider-container-no-bg"
-     id="INTERIORS"
+<div id="INTERIORS"
+     class="u_INTERIORS dmRespRow dmSectionNoParallax hasExtraLayerOverlay"
      data-anchor="INTERIORS"
-     style="text-align:center; position:relative; min-height:700px; overflow:hidden;">
+     style="position:relative; min-height:700px; overflow:hidden; text-align:center;">
 
-  <div class="bgGallerySlideHolder overflow-hidden" style="position:absolute; inset:0;">
-    <div class="bgGallerySlide"
-         data-transition="fade"
-         data-speed="3000"
-         data-index="0"
-         style="position:absolute; inset:0; background-size:cover; background-position:center center; background-repeat:no-repeat; background-image:url('../lirp.cdn-website.com/77aa5218/dms3rep/multi/opt/Black+Swan+Inn+104-1920w.jpg'); opacity:1; transition:opacity 0.75s ease-in-out;"></div>
+  <div class="custom-carousel-slide active"
+       style="background-image:url('../lirp.cdn-website.com/77aa5218/dms3rep/multi/opt/Black+Swan+Inn+104-1920w.jpg');"></div>
 
-    <div class="bgGallerySlide"
-         data-transition="fade"
-         data-speed="3000"
-         data-index="1"
-         style="position:absolute; inset:0; background-size:cover; background-position:center center; background-repeat:no-repeat; background-image:url('../lirp.cdn-website.com/77aa5218/dms3rep/multi/opt/DSC_4544-1920w.jpg'); opacity:0; transition:opacity 0.75s ease-in-out;"></div>
+  <div class="custom-carousel-slide"
+       style="background-image:url('../lirp.cdn-website.com/77aa5218/dms3rep/multi/opt/DSC_4544-1920w.jpg');"></div>
 
-    <div class="bgGallerySlide"
-         data-transition="fade"
-         data-speed="3000"
-         data-index="2"
-         style="position:absolute; inset:0; background-size:cover; background-position:center center; background-repeat:no-repeat; background-image:url('../lirp.cdn-website.com/77aa5218/dms3rep/multi/opt/BombayGrill15_0016-1920w.jpg'); opacity:0; transition:opacity 0.75s ease-in-out;"></div>
-  </div>
+  <div class="custom-carousel-slide"
+       style="background-image:url('../lirp.cdn-website.com/77aa5218/dms3rep/multi/opt/BombayGrill15_0016-1920w.jpg');"></div>
 
-  <div class="bgExtraLayerOverlay"
-       style="position:absolute; inset:0; background-color:rgba(0,0,0,0.28); opacity:1;"></div>
+  <div style="position:absolute; inset:0; background:rgba(0,0,0,0.22); z-index:2;"></div>
 
   <div class="dmRespColsWrapper"
-       id="1173148036"
-       style="position:relative; z-index:2; min-height:700px; display:flex; align-items:center; justify-content:center;">
-    <div class="dmRespCol small-12 medium-12 large-12 u_1620106714"
-         id="1620106714"
+       style="position:relative; z-index:3; min-height:700px; display:flex; align-items:center; justify-content:center;">
+    <div class="dmRespCol small-12 medium-12 large-12"
          style="display:flex; align-items:center; justify-content:center;">
-      <div style="color:#fff; font-size:64px; line-height:1.1; font-family:SouvenirB, 'SouvenirB', sans-serif; font-weight:600; text-align:center; padding:20px;">
+      <div style="color:#fff; font-family:SouvenirB, 'SouvenirB', sans-serif; font-size:74px; line-height:1.1; font-weight:600; text-align:center; padding:20px;">
         Welcome
       </div>
     </div>
   </div>
 </div>
+
+<style>
+#INTERIORS .custom-carousel-slide{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
+  opacity:0;
+  transition:opacity 1s ease-in-out;
+  z-index:1;
+}
+#INTERIORS .custom-carousel-slide.active{
+  opacity:1;
+}
+@media (max-width: 767px){
+  #INTERIORS{
+    min-height:420px !important;
+  }
+  #INTERIORS .dmRespColsWrapper{
+    min-height:420px !important;
+  }
+  #INTERIORS .dmRespColsWrapper > div > div{
+    font-size:38px !important;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const carousel = document.getElementById('INTERIORS');
+  if (!carousel) return;
+
+  const slides = carousel.querySelectorAll('.custom-carousel-slide');
+  if (slides.length < 2) return;
+
+  let index = 0;
+
+  setInterval(function () {
+    slides[index].classList.remove('active');
+    index = (index + 1) % slides.length;
+    slides[index].classList.add('active');
+  }, 3000);
+});
+</script>
 
 
 <!-- replace-->	
