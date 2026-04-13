@@ -1582,20 +1582,75 @@ document.addEventListener('DOMContentLoaded', function () {
 }
 </style>
 
-	<script>
+<script>
 (function () {
-  function applyStaticResponsiveFix() {
-    if (window.innerWidth <= 767) {
-      document.body.classList.remove('dmDesktopBody', 'dmLargeBody');
-      document.body.classList.add('dmMobileBody');
+  let lastMode = '';
 
-      if (window._currentDevice) window._currentDevice = 'mobile';
+  function applyStaticResponsiveFix() {
+    const isMobile = window.innerWidth <= 767;
+    const isTablet = window.innerWidth >= 768 && window.innerWidth <= 1024;
+    const newMode = isMobile ? 'mobile' : (isTablet ? 'tablet' : 'desktop');
+
+    if (newMode === lastMode) return;
+    lastMode = newMode;
+
+    const body = document.body;
+    if (!body) return;
+
+    body.classList.remove(
+      'dmDesktopBody',
+      'dmLargeBody',
+      'dmTabletBody',
+      'dmMobileBody',
+      'responsiveTablet'
+    );
+
+    if (newMode === 'mobile') {
+      body.classList.add('dmMobileBody');
+
+      window._currentDevice = 'mobile';
       if (window.INSITE) window.INSITE.device = 'mobile';
+
+    } else if (newMode === 'tablet') {
+      body.classList.add('dmTabletBody', 'responsiveTablet');
+
+      window._currentDevice = 'tablet';
+      if (window.INSITE) window.INSITE.device = 'tablet';
+
+    } else {
+      body.classList.add('dmDesktopBody', 'dmLargeBody', 'responsiveTablet');
+
+      window._currentDevice = 'desktop';
+      if (window.INSITE) window.INSITE.device = 'desktop';
     }
+
+    document.documentElement.setAttribute('data-device-mode', newMode);
+
+    if (window.jQuery && jQuery.layoutManager && typeof jQuery.layoutManager.initLayout === 'function') {
+      try {
+        jQuery.layoutManager.initLayout();
+      } catch (e) {}
+    }
+
+    window.dispatchEvent(new Event('resize'));
   }
 
-  applyStaticResponsiveFix();
-  window.addEventListener('resize', applyStaticResponsiveFix);
+  let resizeTimer;
+  function onResize() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(applyStaticResponsiveFix, 120);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyStaticResponsiveFix);
+  } else {
+    applyStaticResponsiveFix();
+  }
+
+  window.addEventListener('resize', onResize);
+  window.addEventListener('orientationchange', function () {
+    setTimeout(applyStaticResponsiveFix, 150);
+  });
 })();
 </script>
 
