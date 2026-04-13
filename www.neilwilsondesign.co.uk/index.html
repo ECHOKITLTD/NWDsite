@@ -1446,4 +1446,161 @@ document.addEventListener('DOMContentLoaded', function () {
 </style><!--  End Product Custom HTML Markup -->
 
 
+<!--  Marks hack css begin  -->
+	<style>
+/* ===== Responsive rescue overrides for static Duda/SiteSucker copy ===== */
+
+@media (max-width: 767px) {
+
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+  }
+
+  body,
+  #dmRoot,
+  #dm,
+  .dmwr,
+  .dmOuter,
+  .dmInner,
+  .dmLayoutWrapper,
+  #site_content,
+  .dmContent,
+  .dmRespRowsWrapper,
+  .dmRespRow,
+  .dmRespColsWrapper,
+  .dmRespCol {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .dmInner,
+  .dmDesktopBody .dmInner,
+  html:not(.ios-preview) #dm .hasStickyHeader .dmInner div.dmHeaderContainer,
+  #dm .header-over-content .dmHeaderContainer {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .dmLargeBody .dmRespRow,
+  .dmRespRow {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .dmRespRow.fullBleedMode,
+  .dmRespRow.fullBleedChanged {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .dmRespRow .dmRespColsWrapper,
+  #dm .dmRespRow .dmRespColsWrapper {
+    display: block !important;
+  }
+
+  .dmRespRow .dmRespCol,
+  .dmDesktopBody .dmRespRow .large-6,
+  .dmDesktopBody .dmRespRow .large-12,
+  .large-6,
+  .large-12,
+  .medium-6,
+  .medium-12,
+  .small-12 {
+    float: none !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* Header logo + nav stack nicely */
+  #1918644542,
+  #1199041645,
+  .u_1918644542,
+  .u_1199041645 {
+    width: 100% !important;
+    margin: 0 !important;
+    text-align: center !important;
+  }
+
+  #1466208565 p,
+  #1466208565 {
+    text-align: center !important;
+  }
+
+  /* Make galleries single-column on phone */
+  .layout-container.square .photogallery-row {
+    display: block !important;
+  }
+
+  .layout-container.square .photogallery-column,
+  .photogallery-column.column-3 {
+    width: 100% !important;
+    display: block !important;
+    margin-bottom: 20px !important;
+  }
+
+  .photoGalleryThumbs,
+  .thumbnailInnerWrapper,
+  .image-container {
+    width: 100% !important;
+  }
+
+  .image-container a {
+    display: block !important;
+    width: 100% !important;
+    padding-top: 66% !important; /* adjust if needed */
+    background-size: cover !important;
+    background-position: center !important;
+  }
+
+  .image-container a img {
+    display: none !important;
+  }
+
+  /* Footer columns stack */
+  #1076738588 .dmRespCol {
+    width: 100% !important;
+    margin-bottom: 20px !important;
+    text-align: center !important;
+  }
+
+  /* Better text scaling */
+  h1 { font-size: clamp(2rem, 9vw, 3.2rem) !important; }
+  h2 { font-size: clamp(1.6rem, 7vw, 2.4rem) !important; }
+  h3 { font-size: clamp(1.3rem, 6vw, 1.8rem) !important; }
+
+  .dmNewParagraph p,
+  .dmNewParagraph span,
+  .dmWidget .text {
+    word-wrap: break-word !important;
+  }
+}
+</style>
+
+	<script>
+(function () {
+  function applyStaticResponsiveFix() {
+    if (window.innerWidth <= 767) {
+      document.body.classList.remove('dmDesktopBody', 'dmLargeBody');
+      document.body.classList.add('dmMobileBody');
+
+      if (window._currentDevice) window._currentDevice = 'mobile';
+      if (window.INSITE) window.INSITE.device = 'mobile';
+    }
+  }
+
+  applyStaticResponsiveFix();
+  window.addEventListener('resize', applyStaticResponsiveFix);
+})();
+</script>
+
+<!--  Marks hack css ends  -->
+
+
+	
 </body></html>
