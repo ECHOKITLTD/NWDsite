@@ -1447,11 +1447,138 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 <!--  Marks hack css begin  -->
+
 	<style>
-/* ===== Responsive rescue overrides for static Duda/SiteSucker copy ===== */
+/* ===== Static Duda/SiteSucker responsive rescue ===== */
 
+/* make sizing predictable */
+html {
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* prevent sideways scroll */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* fluid media */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---------- DESKTOP default cleanup ---------- */
+#INTERIORS {
+  position: relative !important;
+  min-height: 70vh;
+  overflow: hidden;
+  padding: 0 !important;
+}
+
+#INTERIORS .custom-carousel-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  z-index: 1;
+}
+
+#INTERIORS .custom-carousel-slide.active {
+  opacity: 1;
+}
+
+#INTERIORS .custom-carousel-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.22);
+  z-index: 2;
+}
+
+#INTERIORS .custom-carousel-content {
+  position: relative;
+  z-index: 3;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4vw;
+}
+
+#INTERIORS .custom-carousel-heading {
+  margin: 0;
+  color: #fff;
+  font-family: SouvenirB, "SouvenirB", sans-serif;
+  font-weight: 600;
+  line-height: 1.05;
+  font-size: clamp(2.2rem, 7vw, 5.5rem);
+  max-width: 90vw;
+  text-wrap: balance;
+}
+
+/* ---------- TABLET ---------- */
+@media (min-width: 768px) and (max-width: 1024px) {
+  html, body,
+  #dmRoot, #dm, .dmwr, .dmOuter, .dmInner,
+  .dmLayoutWrapper, #site_content, .dmContent,
+  .dmRespRowsWrapper, .dmRespRow, .dmRespColsWrapper, .dmRespCol {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .dmInner,
+  .dmDesktopBody .dmInner,
+  html:not(.ios-preview) #dm .hasStickyHeader .dmInner div.dmHeaderContainer,
+  #dm .header-over-content .dmHeaderContainer {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .dmLargeBody .dmRespRow,
+  .dmRespRow {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  .dmRespRow.fullBleedMode,
+  .dmRespRow.fullBleedChanged {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  #INTERIORS,
+  #INTERIORS .custom-carousel-content {
+    min-height: 56vh !important;
+  }
+
+  #INTERIORS .custom-carousel-heading {
+    font-size: clamp(2rem, 6vw, 4rem);
+  }
+
+  .layout-container.square .photogallery-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 20px !important;
+  }
+
+  .layout-container.square .photogallery-column,
+  .photogallery-column.column-3 {
+    width: calc(50% - 10px) !important;
+    display: block !important;
+    margin: 0 !important;
+  }
+}
+
+/* ---------- MOBILE ---------- */
 @media (max-width: 767px) {
-
   html, body {
     overflow-x: hidden !important;
     width: 100% !important;
@@ -1517,7 +1644,7 @@ document.addEventListener('DOMContentLoaded', function () {
     padding-right: 0 !important;
   }
 
-  /* Header logo + nav stack nicely */
+  /* header stack */
   #1918644542,
   #1199041645,
   .u_1918644542,
@@ -1527,12 +1654,29 @@ document.addEventListener('DOMContentLoaded', function () {
     text-align: center !important;
   }
 
-  #1466208565 p,
-  #1466208565 {
+  #1466208565,
+  #1466208565 p {
     text-align: center !important;
   }
 
-  /* Make galleries single-column on phone */
+  .u_1918644542 img,
+  #1918644542 img {
+    width: min(220px, 70vw) !important;
+    height: auto !important;
+  }
+
+  /* hero */
+  #INTERIORS,
+  #INTERIORS .custom-carousel-content {
+    min-height: 48vh !important;
+  }
+
+  #INTERIORS .custom-carousel-heading {
+    max-width: 92vw;
+    font-size: clamp(2rem, 10vw, 3.2rem);
+  }
+
+  /* galleries single column */
   .layout-container.square .photogallery-row {
     display: block !important;
   }
@@ -1553,7 +1697,7 @@ document.addEventListener('DOMContentLoaded', function () {
   .image-container a {
     display: block !important;
     width: 100% !important;
-    padding-top: 66% !important; /* adjust if needed */
+    min-height: 220px !important;
     background-size: cover !important;
     background-position: center !important;
   }
@@ -1562,14 +1706,14 @@ document.addEventListener('DOMContentLoaded', function () {
     display: none !important;
   }
 
-  /* Footer columns stack */
+  /* footer stack */
   #1076738588 .dmRespCol {
     width: 100% !important;
     margin-bottom: 20px !important;
     text-align: center !important;
   }
 
-  /* Better text scaling */
+  /* type */
   h1 { font-size: clamp(2rem, 9vw, 3.2rem) !important; }
   h2 { font-size: clamp(1.6rem, 7vw, 2.4rem) !important; }
   h3 { font-size: clamp(1.3rem, 6vw, 1.8rem) !important; }
@@ -1578,22 +1722,25 @@ document.addEventListener('DOMContentLoaded', function () {
   .dmNewParagraph span,
   .dmWidget .text {
     word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
   }
 }
 </style>
 
-<script>
+	<script>
 (function () {
   let lastMode = '';
+  let resizeTimer = null;
+  let carouselInterval = null;
 
-  function applyStaticResponsiveFix() {
-    const isMobile = window.innerWidth <= 767;
-    const isTablet = window.innerWidth >= 768 && window.innerWidth <= 1024;
-    const newMode = isMobile ? 'mobile' : (isTablet ? 'tablet' : 'desktop');
+  function getMode() {
+    const w = window.innerWidth;
+    if (w <= 767) return 'mobile';
+    if (w <= 1024) return 'tablet';
+    return 'desktop';
+  }
 
-    if (newMode === lastMode) return;
-    lastMode = newMode;
-
+  function setBodyMode(mode) {
     const body = document.body;
     if (!body) return;
 
@@ -1605,51 +1752,91 @@ document.addEventListener('DOMContentLoaded', function () {
       'responsiveTablet'
     );
 
-    if (newMode === 'mobile') {
+    if (mode === 'mobile') {
       body.classList.add('dmMobileBody');
-
       window._currentDevice = 'mobile';
       if (window.INSITE) window.INSITE.device = 'mobile';
-
-    } else if (newMode === 'tablet') {
+    } else if (mode === 'tablet') {
       body.classList.add('dmTabletBody', 'responsiveTablet');
-
       window._currentDevice = 'tablet';
       if (window.INSITE) window.INSITE.device = 'tablet';
-
     } else {
       body.classList.add('dmDesktopBody', 'dmLargeBody', 'responsiveTablet');
-
       window._currentDevice = 'desktop';
       if (window.INSITE) window.INSITE.device = 'desktop';
     }
 
-    document.documentElement.setAttribute('data-device-mode', newMode);
+    document.documentElement.setAttribute('data-device-mode', mode);
+  }
 
+  function initCarousel() {
+    const carousel = document.getElementById('INTERIORS');
+    if (!carousel) return;
+
+    const slides = carousel.querySelectorAll('.custom-carousel-slide');
+    if (!slides.length) return;
+
+    if (carouselInterval) {
+      clearInterval(carouselInterval);
+      carouselInterval = null;
+    }
+
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === 0);
+    });
+
+    if (slides.length < 2) return;
+
+    let index = 0;
+    carouselInterval = setInterval(function () {
+      slides[index].classList.remove('active');
+      index = (index + 1) % slides.length;
+      slides[index].classList.add('active');
+    }, 3000);
+  }
+
+  function refreshRuntimeLayout() {
     if (window.jQuery && jQuery.layoutManager && typeof jQuery.layoutManager.initLayout === 'function') {
       try {
         jQuery.layoutManager.initLayout();
       } catch (e) {}
     }
-
-    window.dispatchEvent(new Event('resize'));
   }
 
-  let resizeTimer;
-  function onResize() {
+  function applyResponsiveFix(force) {
+    const mode = getMode();
+
+    if (!force && mode === lastMode) {
+      refreshRuntimeLayout();
+      return;
+    }
+
+    lastMode = mode;
+    setBodyMode(mode);
+    refreshRuntimeLayout();
+    initCarousel();
+  }
+
+  function handleResize() {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(applyStaticResponsiveFix, 120);
+    resizeTimer = setTimeout(function () {
+      applyResponsiveFix(false);
+    }, 150);
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', applyStaticResponsiveFix);
+    document.addEventListener('DOMContentLoaded', function () {
+      applyResponsiveFix(true);
+    });
   } else {
-    applyStaticResponsiveFix();
+    applyResponsiveFix(true);
   }
 
-  window.addEventListener('resize', onResize);
+  window.addEventListener('resize', handleResize);
   window.addEventListener('orientationchange', function () {
-    setTimeout(applyStaticResponsiveFix, 150);
+    setTimeout(function () {
+      applyResponsiveFix(true);
+    }, 180);
   });
 })();
 </script>
