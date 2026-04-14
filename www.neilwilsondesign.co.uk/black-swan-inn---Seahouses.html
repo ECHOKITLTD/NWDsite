@@ -2350,7 +2350,7 @@ html, body {
     bindGalleryClicks();
   });
 })();
-</script>
+
 
   function init() {
     applyMobileOnlyLayoutFix();
@@ -2377,6 +2377,16 @@ html, body {
     bindGalleryClicks();
   });
 })();
+</script>
+
+	<script>
+document.addEventListener('click', function (e) {
+  const a = e.target.closest('#1011172142 .image-container a[data-image-url]');
+  if (a) {
+    alert(a.getAttribute('data-image-url'));
+    e.preventDefault();
+  }
+}, true);
 </script>
 
 <!------------  Marks hack css END  --------------------->
