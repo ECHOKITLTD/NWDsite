@@ -1648,8 +1648,9 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-	<!--  Marks hack css begin  -->
-<style>
+<!------------  Marks hack css begin -------------------->
+
+	<style>
 /* ===== BLACK SWAN PAGE ONLY: responsive + lightbox rescue ===== */
 
 html, body {
@@ -1949,6 +1950,8 @@ html, body {
 
 <script>
 (function () {
+  const GALLERY_SELECTOR = '#1011172142';
+
   let galleryItems = [];
   let currentIndex = 0;
   let overlay, overlayImg, btnClose, btnPrev, btnNext;
@@ -1959,8 +1962,8 @@ html, body {
   }
 
   function setupViewMore() {
-    const button = document.querySelector('#1011172142 .photoGalleryViewAll.link');
-    const gallery = document.getElementById('1011172142');
+    const button = document.querySelector(GALLERY_SELECTOR + ' .photoGalleryViewAll.link');
+    const gallery = document.querySelector(GALLERY_SELECTOR);
     if (!button || !gallery || button.dataset.nwdBound === '1') return;
 
     button.dataset.nwdBound = '1';
@@ -1988,17 +1991,17 @@ html, body {
 
   function getGalleryLinks() {
     return Array.from(
-      document.querySelectorAll('#1011172142 .image-container a[data-image-url]')
+      document.querySelectorAll(GALLERY_SELECTOR + ' .image-container a[data-image-url]')
     );
   }
 
   function rebuildGalleryItems() {
     const links = getGalleryLinks();
     galleryItems = links
-      .map((link, index) => {
+      .map(function (link, index) {
         const fullSrc = link.getAttribute('data-image-url');
         link.dataset.nwdIndex = index;
-        return fullSrc ? { link, src: fullSrc } : null;
+        return fullSrc ? { link: link, src: fullSrc } : null;
       })
       .filter(Boolean);
   }
@@ -2085,7 +2088,7 @@ html, body {
         e.stopPropagation();
         rebuildGalleryItems();
         openLightbox(index);
-      }, false);
+      });
 
       link.addEventListener('touchend', function (e) {
         e.preventDefault();
@@ -2110,9 +2113,7 @@ html, body {
     init();
   }
 
-  window.addEventListener('resize', function () {
-    applyMobileOnlyLayoutFix();
-  });
+  window.addEventListener('resize', applyMobileOnlyLayoutFix);
 
   window.addEventListener('orientationchange', function () {
     setTimeout(applyMobileOnlyLayoutFix, 120);
@@ -2125,15 +2126,6 @@ html, body {
 })();
 </script>
 
-<script>
-document.addEventListener('click', function(e) {
-  const a = e.target.closest('#1011172142 .image-container a[data-image-url]');
-  if (a) {
-    alert('thumbnail click detected');
-    e.preventDefault();
-  }
-}, true);
-</script>
-<!--  Marks hack css END  -->
+<!------------  Marks hack css END  --------------------->
 
 </body></html>
