@@ -1844,9 +1844,11 @@ img, video, iframe {
 <!--  Marks hack css ends  -->
 
 <style>
-/* ===== Homepage gallery fix: flatten rows, then use columns ===== */
+/* ===== SAFE index-page tablet fallback ===== */
+/* No DOM surgery, no masonry tricks, no broken images */
 
-@media (min-width: 768px) and (max-width: 1100px) {
+@media (min-width: 768px) and (max-width: 1150px) {
+
   .dmLargeBody .dmRespRow,
   .dmRespRow {
     padding-left: 20px !important;
@@ -1859,33 +1861,54 @@ img, video, iframe {
     padding-right: 0 !important;
   }
 
+  /* Make homepage galleries stack cleanly at awkward middle widths */
   #1966173978 .layout-container.square,
   #1704681630 .layout-container.square,
   #1103192253 .layout-container.square {
-    column-count: 2 !important;
-    column-gap: 18px !important;
     display: block !important;
   }
 
-  #1966173978 .layout-container.square > .photoGalleryThumbs,
-  #1704681630 .layout-container.square > .photoGalleryThumbs,
-  #1103192253 .layout-container.square > .photoGalleryThumbs {
-    display: inline-block !important;
-    width: 100% !important;
-    margin: 0 0 18px 0 !important;
-    break-inside: avoid !important;
-    -webkit-column-break-inside: avoid !important;
-    page-break-inside: avoid !important;
-    vertical-align: top !important;
+  #1966173978 .layout-container.square .photogallery-row,
+  #1704681630 .layout-container.square .photogallery-row,
+  #1103192253 .layout-container.square .photogallery-row {
+    display: block !important;
   }
 
-  #1966173978 .layout-container.square > .photoGalleryThumbs .thumbnailInnerWrapper,
-  #1704681630 .layout-container.square > .photoGalleryThumbs .thumbnailInnerWrapper,
-  #1103192253 .layout-container.square > .photoGalleryThumbs .thumbnailInnerWrapper,
-  #1966173978 .layout-container.square > .photoGalleryThumbs .image-container,
-  #1704681630 .layout-container.square > .photoGalleryThumbs .image-container,
-  #1103192253 .layout-container.square > .photoGalleryThumbs .image-container {
+  #1966173978 .layout-container.square .photogallery-column,
+  #1704681630 .layout-container.square .photogallery-column,
+  #1103192253 .layout-container.square .photogallery-column {
     width: 100% !important;
+    max-width: 100% !important;
+    display: block !important;
+    margin: 0 0 20px 0 !important;
+  }
+
+  #1966173978 .photoGalleryThumbs,
+  #1704681630 .photoGalleryThumbs,
+  #1103192253 .photoGalleryThumbs {
+    width: 100% !important;
+    margin: 0 0 20px 0 !important;
+    display: block !important;
+  }
+
+  #1966173978 .thumbnailInnerWrapper,
+  #1704681630 .thumbnailInnerWrapper,
+  #1103192253 .thumbnailInnerWrapper,
+  #1966173978 .image-container,
+  #1704681630 .image-container,
+  #1103192253 .image-container {
+    width: 100% !important;
+  }
+
+  #1966173978 .image-container a,
+  #1704681630 .image-container a,
+  #1103192253 .image-container a {
+    display: block !important;
+    width: 100% !important;
+    min-height: 260px !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
   }
 
   #1088843014,
@@ -1895,59 +1918,6 @@ img, video, iframe {
     margin-bottom: 18px !important;
   }
 }
-
-@media (min-width: 768px) and (max-width: 900px) {
-  #1966173978 .layout-container.square,
-  #1704681630 .layout-container.square,
-  #1103192253 .layout-container.square {
-    column-count: 1 !important;
-    column-gap: 0 !important;
-  }
-}
 </style>
-
-<script>
-(function () {
-  const galleryIds = ['1966173978', '1704681630', '1103192253'];
-
-  function flattenGallery(galleryId) {
-    const gallery = document.getElementById(galleryId);
-    if (!gallery) return;
-
-    const container = gallery.querySelector('.layout-container.square');
-    if (!container) return;
-
-    if (container.dataset.nwdFlattened === '1') return;
-
-    const thumbs = Array.from(container.querySelectorAll('.photoGalleryThumbs'));
-    if (!thumbs.length) return;
-
-    thumbs.forEach(function (thumb) {
-      container.appendChild(thumb);
-    });
-
-    const oldRows = container.querySelectorAll('.photogallery-row, .photogallery-column');
-    oldRows.forEach(function (el) {
-      el.remove();
-    });
-
-    container.dataset.nwdFlattened = '1';
-  }
-
-  function initFlattening() {
-    if (window.innerWidth < 768 || window.innerWidth > 1100) return;
-    galleryIds.forEach(flattenGallery);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initFlattening);
-  } else {
-    initFlattening();
-  }
-
-  window.addEventListener('load', initFlattening);
-})();
-</script>
-
 	
 </body></html>
