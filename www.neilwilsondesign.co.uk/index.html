@@ -1843,6 +1843,96 @@ img, video, iframe {
 
 <!--  Marks hack css ends  -->
 
+	<style>
+/* ===== Homepage mid-width rescue ===== */
+
+/* tablet / small laptop */
+@media (min-width: 768px) and (max-width: 1100px) {
+
+  /* reduce row padding a bit */
+  .dmLargeBody .dmRespRow,
+  .dmRespRow {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .dmRespRow.fullBleedMode,
+  .dmRespRow.fullBleedChanged {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* make the galleries a neat 2-column grid */
+  #1966173978 .layout-container.square,
+  #1704681630 .layout-container.square,
+  #1103192253 .layout-container.square {
+    display: block !important;
+  }
+
+  #1966173978 .layout-container.square .photogallery-row,
+  #1704681630 .layout-container.square .photogallery-row,
+  #1103192253 .layout-container.square .photogallery-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 18px !important;
+    margin-bottom: 18px !important;
+  }
+
+  #1966173978 .layout-container.square .photogallery-column,
+  #1704681630 .layout-container.square .photogallery-column,
+  #1103192253 .layout-container.square .photogallery-column {
+    width: calc(50% - 9px) !important;
+    max-width: calc(50% - 9px) !important;
+    display: block !important;
+    margin: 0 !important;
+  }
+
+  #1966173978 .photoGalleryThumbs,
+  #1704681630 .photoGalleryThumbs,
+  #1103192253 .photoGalleryThumbs {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+
+  #1966173978 .image-container a,
+  #1704681630 .image-container a,
+  #1103192253 .image-container a {
+    display: block !important;
+    width: 100% !important;
+    min-height: 220px !important;
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+
+  /* tidy headings */
+  #1088843014,
+  #1202306085,
+  #1477714804 {
+    text-align: center !important;
+    margin-bottom: 18px !important;
+  }
+}
+
+/* narrower tablet: switch to single column sooner */
+@media (min-width: 768px) and (max-width: 900px) {
+  #1966173978 .layout-container.square .photogallery-row,
+  #1704681630 .layout-container.square .photogallery-row,
+  #1103192253 .layout-container.square .photogallery-row {
+    display: block !important;
+    gap: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  #1966173978 .layout-container.square .photogallery-column,
+  #1704681630 .layout-container.square .photogallery-column,
+  #1103192253 .layout-container.square .photogallery-column {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block !important;
+    margin: 0 0 20px 0 !important;
+  }
+}
+</style>
 
 	
 </body></html>
