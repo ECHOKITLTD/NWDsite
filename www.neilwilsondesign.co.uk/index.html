@@ -1844,7 +1844,7 @@ img, video, iframe {
 <!--  Marks hack css ends  -->
 
 <style>
-/* ===== Homepage mid-width rescue: flatten gallery rows ===== */
+/* ===== Homepage mid-width rescue: no-gap masonry columns ===== */
 
 @media (min-width: 768px) and (max-width: 1100px) {
 
@@ -1860,35 +1860,50 @@ img, video, iframe {
     padding-right: 0 !important;
   }
 
-  /* Flatten Duda's row wrappers and use CSS grid instead */
+  /* turn each homepage gallery into 2 flowing columns */
   #1966173978 .layout-container.square,
   #1704681630 .layout-container.square,
   #1103192253 .layout-container.square {
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 18px !important;
+    column-count: 2 !important;
+    column-gap: 18px !important;
+    display: block !important;
   }
 
+  /* flatten wrappers so items flow naturally into columns */
   #1966173978 .layout-container.square .photogallery-row,
   #1704681630 .layout-container.square .photogallery-row,
-  #1103192253 .layout-container.square .photogallery-row {
-    display: contents !important;
-  }
-
+  #1103192253 .layout-container.square .photogallery-row,
   #1966173978 .layout-container.square .photogallery-column,
   #1704681630 .layout-container.square .photogallery-column,
   #1103192253 .layout-container.square .photogallery-column {
+    display: contents !important;
     width: auto !important;
     max-width: none !important;
-    display: block !important;
     margin: 0 !important;
   }
 
+  /* each card becomes one masonry block */
   #1966173978 .photoGalleryThumbs,
   #1704681630 .photoGalleryThumbs,
   #1103192253 .photoGalleryThumbs {
+    display: inline-block !important;
     width: 100% !important;
-    margin: 0 !important;
+    margin: 0 0 18px 0 !important;
+    break-inside: avoid !important;
+    -webkit-column-break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  #1966173978 .thumbnailInnerWrapper,
+  #1704681630 .thumbnailInnerWrapper,
+  #1103192253 .thumbnailInnerWrapper {
+    width: 100% !important;
+  }
+
+  #1966173978 .image-container,
+  #1704681630 .image-container,
+  #1103192253 .image-container {
+    width: 100% !important;
   }
 
   #1966173978 .image-container a,
@@ -1896,7 +1911,6 @@ img, video, iframe {
   #1103192253 .image-container a {
     display: block !important;
     width: 100% !important;
-    min-height: 220px !important;
     background-size: cover !important;
     background-position: center center !important;
   }
@@ -1909,13 +1923,19 @@ img, video, iframe {
   }
 }
 
-/* Narrower tablet: switch to one column */
+/* narrower tablet: switch to single column */
 @media (min-width: 768px) and (max-width: 900px) {
   #1966173978 .layout-container.square,
   #1704681630 .layout-container.square,
   #1103192253 .layout-container.square {
-    grid-template-columns: 1fr !important;
-    gap: 20px !important;
+    column-count: 1 !important;
+    column-gap: 0 !important;
+  }
+
+  #1966173978 .photoGalleryThumbs,
+  #1704681630 .photoGalleryThumbs,
+  #1103192253 .photoGalleryThumbs {
+    margin-bottom: 20px !important;
   }
 }
 </style>
